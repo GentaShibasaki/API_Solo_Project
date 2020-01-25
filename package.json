@@ -1,0 +1,32 @@
+{
+  "name": "cc11-project.API",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "node tests/initialize.js && mocha tests/test.js && yarn lint",
+    "lint": "eslint --fix .",
+    "start": "node index.js",
+    "dev": "nodemon ./src/index.js",
+    "migrate": "knex migrate:latest --knexfile models/knexfile.js",
+    "rollback": "knex migrate:rollback --knexfile models/knexfile.js "
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "knex": "^0.20.8",
+    "moment": "^2.24.0",
+    "pg": "^7.17.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-config-problems": "^3.1.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "mocha": "^7.0.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1"
+  }
+}

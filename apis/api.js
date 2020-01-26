@@ -2,12 +2,14 @@ const express = require("express");
 const APIs = (knex) => {
   const app = express();
   const bodyParser = require("body-parser");
+  const methodOverride = require("method-override");
   app.use(bodyParser.json({ type: "application/json", limit: "50mb" }));
+  app.use(methodOverride('_method'));
   app.use(express.urlencoded({extended: true}));
 
     app.get("/api/get", (req, res) => {
       knex("sample")
-        .select()
+        .orderBy('id')
         .then((alldata) => res.send(alldata))
         .catch((err) => {
           res.send(err);
@@ -15,10 +17,6 @@ const APIs = (knex) => {
       });
 
       app.post("/api/post", (req, res) => {
-        console.log(req.body);
-        console.log(req.route.path);
-        if(req.route.path = "/api/put") next();
-
         knex("sample")
           .insert({ 
             sampleColumn1: req.body.sampleColumn1, 
@@ -33,11 +31,6 @@ const APIs = (knex) => {
           .catch((err) => {
             res.send(err);
           })
-      });
-
-      app.post("/api/put", (req, res, next) => {
-        console.log("AAAAA");
-        if(req.route.path = "/api/put") req.app.put(req.route.path);
       });
 
       app.put("/api/put/:key", (req, res) => {
@@ -87,7 +80,7 @@ const APIs = (knex) => {
             .select();
         })
         .then((data) =>{ 
-          res.send(data.pop())
+          res.send(data);
         })
         .catch((err) => {
           res.send(err);

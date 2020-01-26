@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
   <head>
     <meta charset="utf-8">
@@ -28,7 +27,13 @@
       </div>
     </form>
 
-    <form action= "/api/put"  method="POST">
+    <form method="POST" action= "/api/put//?_method=put" id="put_form">
+      <input type="hidden" name="_method" value="put">
+      <div>
+        <label for="sampleColumn1">Put data you want to put</label>
+        <input type = "text" name = "put" id = "put_data">
+      </div>
+
       <div>
         <label for="sampleColumn1">sampleColumn1</label>
         <input type = "text" name = "sampleColumn1">
@@ -38,13 +43,62 @@
         <input type = "text" name = "sampleColumn2">
       </div>
       <div>
-        <input type="submit" value="put">
+        <input type="submit" value="put" id="put_input">
       </div>
     </form>
-  </body>
 
-  <script>
+    <form method="POST" action= "/api/patch//?_method=patch" id="patch_form">
+      <input type="hidden" name="_method" value="patch">
+      <div>
+        <label for="sampleColumn1">put data you want to patch</label>
+        <input type = "text" name = "patch" id="patch_data">
+      </div>
+      <div>
+        <label for="sampleColumn1">sampleColumn1</label>
+        <input type = "text" name = "sampleColumn1">
+      </div>
+      <div>
+        <input type="submit" value="patch" id="patch_input">
+      </div>
+    </form>
 
+    <form method="POST" action= "/api/delete//?_method=DELETE" id="delete_form">
+      <input type="hidden" name="_method" value="DELETE">
+      <div>
+        <label for="sampleColumn1">Put data you want to delete</label>
+        <input type = "text" name = "sampleColumn1" id="delete_data">
+      </div>
+      <div>
+        <input type="submit" value="delete" id="delete_input">
+      </div>
+    </form>
+
+  <script type="text/javascript">
+
+      document.getElementById("put_input").onclick =
+      function(){
+        document.getElementById("put_form").action = 
+        "/api/put/" + 
+        document.getElementById("put_data").value +
+        "/?_method=put";
+      }
+
+      document.getElementById("patch_input").onclick =
+      function(){
+        document.getElementById("patch_form").action = 
+        "/api/patch/" + 
+        document.getElementById("patch_data").value +
+        "/?_method=patch";
+      }
+
+      document.getElementById("delete_input").onclick =
+      function(){
+        document.getElementById("delete_form").action = 
+        "/api/delete/" + 
+        document.getElementById("delete_data").value +
+        "/?_method=DELETE";
+      }
   </script>
-
+  
+  </body>
 </html>

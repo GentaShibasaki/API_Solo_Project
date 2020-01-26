@@ -9,7 +9,7 @@ This was created during my time as a student at Code Chrysalis
 ```
  -create db
  ```bash
-    echo "CREATE DATABASE sample;" | psql
+    echo "CREATE DATABASE apisolo;" | psql
 ```
  -do migration
  ```bash

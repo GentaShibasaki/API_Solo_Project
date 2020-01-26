@@ -40,10 +40,7 @@ const APIs = (knex) => {
         if(req.route.path = "/api/put") req.app.put(req.route.path);
       });
 
-      app.put("/api/put", (req, res) => {
-        console.log("HIHI");
-        console.log(req.body);
-        console.log(req.params.key);
+      app.put("/api/put/:key", (req, res) => {
         knex('sample')
         .where('sampleColumn1', req.params.key)
         .update({

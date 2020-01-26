@@ -1,8 +1,9 @@
 const express = require("express");
 const APIs = (knex) => {
   const app = express();
-
-  app.use(express.json());
+  const bodyParser = require("body-parser");
+  app.use(bodyParser.json({ type: "application/json", limit: "50mb" }));
+  app.use(express.urlencoded({extended: true}));
 
     app.get("/api/get", (req, res) => {
       knex("sample")
@@ -14,11 +15,15 @@ const APIs = (knex) => {
       });
 
       app.post("/api/post", (req, res) => {
+        console.log(req.body);
+        console.log(req.route.path);
+        if(req.route.path = "/api/put") next();
+
         knex("sample")
           .insert({ 
             sampleColumn1: req.body.sampleColumn1, 
             sampleColumn2: req.body.sampleColumn2})
-          .then(() => {
+          .then(() => { 
             return knex("sample") 
               .where({ sampleColumn1: req.body.sampleColumn1})
               .select();
@@ -30,7 +35,15 @@ const APIs = (knex) => {
           })
       });
 
-      app.put("/api/put/:key", (req, res) => {
+      app.post("/api/put", (req, res, next) => {
+        console.log("AAAAA");
+        if(req.route.path = "/api/put") req.app.put(req.route.path);
+      });
+
+      app.put("/api/put", (req, res) => {
+        console.log("HIHI");
+        console.log(req.body);
+        console.log(req.params.key);
         knex('sample')
         .where('sampleColumn1', req.params.key)
         .update({
